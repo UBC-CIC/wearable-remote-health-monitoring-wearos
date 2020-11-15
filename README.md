@@ -1,4 +1,4 @@
-# wearOSHealthApp
+# HealthMonitoringAppWearOS
 
 This application collects health information in real-time and sends it over to AWS to analyze for abnormalities. 
 
@@ -34,6 +34,8 @@ Android AWS PubSub example - https://github.com/felipemeriga/aws-sdk-android-sam
 ## Related Projects
 
 [The Mobile Health Monitoring Platform](https://github.com/UBC-CIC/Mobile_Health_Monitoring_Platform)
+
+[HealthMonitoringAppWatchOS](https://github.com/UBC-CIC/HealthMonitoringAppWatchOS)
 
 ## License
 This project is distributed under MIT license. 
