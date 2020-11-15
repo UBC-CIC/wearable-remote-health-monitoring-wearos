@@ -1,0 +1,139 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  IoTTopicName:
+    Type: String
+    MinLength: 1
+    Default: "topic1"
+    Description: "IoT Topic Name that your devices will send messages to."
+  StreamArn: 
+    Type: String
+    Description: "ARN of the kinesis data stream to send messages to"
+  StreamName: 
+    Type: String
+    Default: "kinesisname"
+Resources:
+    IoTPolicy:
+        Type: "AWS::IoT::Policy"
+        Properties:
+            PolicyDocument: |
+                {
+                  "Version": "2012-10-17",
+                  "Statement": [
+                    {
+                      "Effect": "Allow",
+                      "Action": "iot:Connect",
+                      "Resource": "*"
+                    },
+                    {
+                      "Effect": "Allow",
+                      "Action": [
+                        "iot:Publish",
+                        "iot:Subscribe",
+                        "iot:Receive"
+                      ],
+                      "Resource": "*"
+                    }
+                  ]
+                }
+                
+    CognitoIdentityPool:
+        Type: "AWS::Cognito::IdentityPool"
+        Properties:
+            AllowUnauthenticatedIdentities: true
+
+    CognitoUnAuthorizedRole:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/"
+            AssumeRolePolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Effect: "Allow"
+                  Principal: 
+                    Federated: "cognito-identity.amazonaws.com"
+                  Action: 
+                    - "sts:AssumeRoleWithWebIdentity"
+                  Condition:
+                    StringEquals: 
+                        "cognito-identity.amazonaws.com:aud": !Ref CognitoIdentityPool
+                    "ForAnyValue:StringLike":
+                        "cognito-identity.amazonaws.com:amr": unauthenticated
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/AWSIoTFullAccess"
+            Policies:
+                - PolicyName: "CognitoUnauthorizedPolicy"
+                  PolicyDocument: 
+                    Version: "2012-10-17"
+                    Statement: 
+                        - Effect: "Allow"
+                          Action:
+                            - "mobileanalytics:PutEvents"
+                            - "cognito-sync:*"
+                          Resource: "*"
+            
+                
+              
+    IdentityPoolRoleMapping:
+        Type: "AWS::Cognito::IdentityPoolRoleAttachment"
+        Properties:
+            IdentityPoolId: !Ref CognitoIdentityPool
+            Roles:
+                #authenticated: !GetAtt CognitoAuthorizedRole.Arn
+                unauthenticated: !GetAtt CognitoUnAuthorizedRole.Arn
+
+    MyTopicRule:
+        Type: 'AWS::IoT::TopicRule'
+        Properties:
+            TopicRulePayload:
+                RuleDisabled: 'false'
+                Sql: !Sub 'SELECT * FROM "${IoTTopicName}" WHERE heart_rate > 50'
+                Actions:
+                    - Kinesis:
+                        RoleArn: !Sub '${IoTTopicRuleRole.Arn}'
+                        StreamName: !Sub '${StreamName}'
+                        PartitionKey: 1
+                AwsIotSqlVersion: 2016-03-23
+    IoTTopicRuleRole:
+        Type: AWS::IAM::Role
+        Properties:
+            AssumeRolePolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+              - Effect: Allow
+                Principal:
+                  Service:
+                  - iot.amazonaws.com
+                Action:
+                - sts:AssumeRole
+            Path: /
+            Policies:
+                - PolicyName: 'IoTTopicRulePolicy'
+                  PolicyDocument:
+                      Version: '2012-10-17'
+                      Statement:
+                          Effect: Allow
+                          Action:
+                              - kinesis:PutRecord
+                          Resource: !Sub '${StreamArn}'
+Outputs:
+  IdentityPoolId:
+    Value: !Ref CognitoIdentityPool
+    Export:
+      Name: "CognitoIdentityPool::Id"
+  Region:
+    Value: !Ref "AWS::Region"
+  IoTPolicyName: 
+    Value: !Ref IoTPolicy
+  
+Metadata:
+  'AWS::CloudFormation::Designer':
+    4115e536-80e4-43f7-8f32-7b70b0ae9348:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 60
+        'y': 90
+      z: 1
+      embeds: []
