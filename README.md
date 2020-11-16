@@ -16,7 +16,8 @@ Use the cloudformation template in the Cloudformation folder to setup a Cloudfor
 Use the output of the stack to setup the Android Studio project. Once the stack is set up it will output : IdentityPoolId, IoTPolicyName, Region. Change the constants inside AWSViewModel class to the generated values. You can lookup IOTEndpoint address in IoTCore in AWS console (Go to IoTCore => Settings). 
 
 ## AWS Architecture
-3)Add the overall architecture diagram 
+
+<img src="./architecture.png"  width="500"/>
 
 ## Useful links
 
