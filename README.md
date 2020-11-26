@@ -21,15 +21,15 @@ Use the output of the stack to setup the Android Studio project. Once the stack 
 
 ## Useful links
 
-Foreground service - https://developer.android.com/guide/components/foreground-services
+[Foreground service](https://developer.android.com/guide/components/foreground-services)
 
-Live data - https://developer.android.com/topic/libraries/architecture/livedata
+[Live data](https://developer.android.com/topic/libraries/architecture/livedata)
 
-ViewModel - https://developer.android.com/topic/libraries/architecture/viewmodel
+[ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 
-Debug on a physical device - https://developer.android.com/training/wearables/apps/creating
+[Debug on a physical device](https://developer.android.com/training/wearables/apps/creating)
 
-Android AWS PubSub example - https://github.com/felipemeriga/aws-sdk-android-samples/tree/master/AndroidPubSub
+[Android AWS PubSub example](https://github.com/felipemeriga/aws-sdk-android-samples/tree/master/AndroidPubSub)
 
 
 ## Related Projects
