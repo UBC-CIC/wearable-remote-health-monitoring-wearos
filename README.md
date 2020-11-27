@@ -17,7 +17,7 @@ Use the output of the stack to setup the Android Studio project. Once the stack 
 
 ## AWS Architecture
 
-<img src="./architecture.png"  width="500"/>
+<img src="https://github.com/UBC-CIC/HealthMonitoringAppWearOS/blob/main/docs/images/architecture.png"  width="500"/>
 
 ## Useful links
 
