@@ -2,6 +2,8 @@
 
 This application collects health information in real-time and sends it over to AWS to analyze for abnormalities. 
 
+<img src="https://github.com/UBC-CIC/HealthMonitoringAppWearOS/blob/main/docs/images/wearossc1.png"  width="300"/>
+
 ## Overview 
 This app is capable of collecting health information such as heart rate and the location of the user. It has a thread that always runs in the foreground which sends the health data over to AWS servers. You can adjust the sampling rate for both location and heart rate to improve battery life. 
 
