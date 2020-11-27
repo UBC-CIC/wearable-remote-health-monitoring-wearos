@@ -16,19 +16,20 @@ Use the cloudformation template in the Cloudformation folder to setup a Cloudfor
 Use the output of the stack to setup the Android Studio project. Once the stack is set up it will output : IdentityPoolId, IoTPolicyName, Region. Change the constants inside AWSViewModel class to the generated values. You can lookup IOTEndpoint address in IoTCore in AWS console (Go to IoTCore => Settings). 
 
 ## AWS Architecture
-3)Add the overall architecture diagram 
+
+<img src="./architecture.png"  width="500"/>
 
 ## Useful links
 
-Foreground service - https://developer.android.com/guide/components/foreground-services
+[Foreground service](https://developer.android.com/guide/components/foreground-services)
 
-Live data - https://developer.android.com/topic/libraries/architecture/livedata
+[Live data](https://developer.android.com/topic/libraries/architecture/livedata)
 
-ViewModel - https://developer.android.com/topic/libraries/architecture/viewmodel
+[ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 
-Debug on a physical device - https://developer.android.com/training/wearables/apps/creating
+[Debug on a physical device](https://developer.android.com/training/wearables/apps/creating)
 
-Android AWS PubSub example - https://github.com/felipemeriga/aws-sdk-android-samples/tree/master/AndroidPubSub
+[Android AWS PubSub example](https://github.com/felipemeriga/aws-sdk-android-samples/tree/master/AndroidPubSub)
 
 
 ## Related Projects
