@@ -12,7 +12,7 @@ This app is capable of collecting health information such as heart rate and the 
 You should familiarize yourself with Cloudformation, IoTCore before following the instructions below.
 
 ### Stack input
-Use the cloudformation template in the Cloudformation folder to setup a Cloudformation Stack on IoT Core. Make sure you are in the correct region as this will affect the geographical location of where the data will be stored. The parameters to the stack are the Kinesis Data Stream ARN, the logical name of the Stream and the name of the topic your wearable is subscribed to. Use the stream to which you want to redirect the output of the wearable. 
+Use the cloudformation template in the "Cloudformation" folder to setup a "Cloudformation Stack". Make sure you are in the correct region as this will affect the geographical location of where the data will be stored. The parameters to the stack are the Kinesis Data Stream ARN, the logical name of the Stream and the name of the topic your wearable is subscribed to. Use the stream to which you want to redirect the output of the wearable. 
 
 ### Stack output
 Use the output of the stack to setup the Android Studio project. Once the stack is set up it will output : IdentityPoolId, IoTPolicyName, Region. Change the constants inside AWSViewModel class to the generated values. You can lookup IOTEndpoint address in IoTCore in AWS console (Go to IoTCore => Settings). 
